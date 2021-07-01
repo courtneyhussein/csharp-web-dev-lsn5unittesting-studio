@@ -25,17 +25,34 @@ namespace BalancedBracketsNS
         */
         public static bool HasBalancedBrackets(String str)
         {
+            if (str == "")
+            {
+                throw new ArgumentException("Arguement must not be an empty string.");
+            }
+            bool hasBracket = false;
             int brackets = 0;
             foreach (char ch in str.ToCharArray())
             {
                 if (ch == '[')
                 {
                     brackets++;
+                    hasBracket = true;
                 }
                 else if (ch == ']')
                 {
                     brackets--;
+                    hasBracket = true;
                 }
+                //New if statement that returns false if a backwards bracket ever comes before a forwards bracket.
+                if (brackets < 0)
+                {
+                    return brackets == 0;
+                }
+            }
+            //If statement that checks to see if the string did not contain any brackets at all.
+            if (hasBracket == false)
+            {
+                return hasBracket;
             }
             return brackets == 0;
         }
